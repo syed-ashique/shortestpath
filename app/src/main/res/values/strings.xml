@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Shortestpath</string>
+
+    <string name="title">Please enter input matrix:</string>
+    <string name="input_instruction">Separate column with a space \nSeparate row with an enter</string>
+    <string name="find_path">Find Path</string>
+</resources>
