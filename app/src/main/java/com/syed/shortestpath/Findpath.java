@@ -17,13 +17,16 @@ public class Findpath {
 
     public Findpath(Matrix matrix) {
         this.matrix = matrix;
+        path = new LinkedList<>();
     }
 
     public void calculatePath () {
-        path = new LinkedList<>();
         int[][] grid = matrix.getMatrix();
-        int[][] gridTracker = matrix.getMatrixTracker();
         int lastValidColumnIndex = -1;
+
+        if (grid.length == 0) {
+            return;
+        }
 
         for (int i = 0; i < grid[0].length; i++) {
             isPathPossible = false;
