@@ -2,6 +2,7 @@ package com.syed.shortestpath;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -28,6 +29,9 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.text_view_path)
     TextView mTextViewPath;
 
+    @BindView(R.id.text_view_error)
+    TextView mTextViewError;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,13 +41,19 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_find_path)
     public void getResult() {
-        Matrix matrix = Util.parseInput(mEditTextInput.getText().toString());
-        Findpath findpath = new Findpath(matrix);
-        findpath.calculatePath();
+        resetView();
+        try {
+            Matrix matrix = Util.parseInput(mEditTextInput.getText().toString());
+            Findpath findpath = new Findpath(matrix);
+            findpath.calculatePath();
 
-        mTextViewPathPossible.setText(findpath.isPathPossible() ? "Yes" : "No");
-        mTextViewTotalCost.setText(String.valueOf(findpath.getTotalCost()));
-        mTextViewPath.setText("["+pathValue(findpath.getPath())+"]");
+            mTextViewPathPossible.setText(findpath.isPathPossible() ? "Yes" : "No");
+            mTextViewTotalCost.setText(String.valueOf(findpath.getTotalCost()));
+            mTextViewPath.setText("["+pathValue(findpath.getPath())+"]");
+        } catch (Exception ex) {
+            mTextViewError.setVisibility(View.VISIBLE);
+            mTextViewError.setText("Something Went Wrong");
+        }
     }
 
     private String pathValue(List<Integer> path) {
@@ -55,5 +65,12 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         return sb.toString();
+    }
+
+    public void resetView() {
+        mTextViewError.setVisibility(View.GONE);
+        mTextViewPathPossible.setText("");
+        mTextViewTotalCost.setText("");
+        mTextViewPath.setText("");
     }
 }
