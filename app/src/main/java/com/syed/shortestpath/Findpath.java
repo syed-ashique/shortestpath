@@ -10,14 +10,14 @@ import java.util.List;
  */
 
 public class Findpath {
-    private boolean isPathPossible;
-    private List<Integer> path;
-    private int totalCost;
-    private Matrix matrix;
+    private boolean mIsPathPossible;
+    private List<Integer> mPath;
+    private int mTotalCost;
+    private Matrix mMatrix;
 
     public Findpath(Matrix matrix) {
-        this.matrix = matrix;
-        path = new LinkedList<>();
+        mMatrix = matrix;
+        mPath = new LinkedList<>();
     }
 
     /**
@@ -32,11 +32,11 @@ public class Findpath {
      *  Path finding:
      *      1. find the lowest value from the last valid column.
      *      2. check the value where it came from and add it to the queue.
-     *      3. do the process until it reaches to the first column     *
+     *      3. do the process until it reaches to the first column
      */
 
     public void calculatePath () {
-        int[][] grid = matrix.getMatrix();
+        int[][] grid = mMatrix.getMatrix();
         int lastValidColumnIndex = -1;
 
         if (grid.length == 0) {
@@ -44,20 +44,20 @@ public class Findpath {
         }
 
         for (int i = 0; i < grid[0].length; i++) {
-            isPathPossible = false;
+            mIsPathPossible = false;
             for (int j = 0; j < grid.length; j++) {
                 if (i != 0) {
-                    int minValueIndex = matrix.bestIndexToPickFromColumn(j, i);
+                    int minValueIndex = mMatrix.bestIndexToPickFromColumn(j, i);
                     grid[j][i] += grid[minValueIndex][i-1];
-                    matrix.setMatrixTracker(j, i, minValueIndex);
+                    mMatrix.setMatrixTracker(j, i, minValueIndex);
                 }
 
                 if (grid[j][i] < 50) {
                     lastValidColumnIndex = i;
-                    isPathPossible = true;
+                    mIsPathPossible = true;
                 }
             }
-            if (!isPathPossible) {
+            if (!mIsPathPossible) {
                 break;
             }
         }
@@ -66,11 +66,11 @@ public class Findpath {
             return;
 
         //find total cost
-        totalCost = Integer.MAX_VALUE;
+        mTotalCost = Integer.MAX_VALUE;
         int currentRowIndex = 0;
         for (int i = 0; i < grid.length; i++) {
-            if (grid[i][lastValidColumnIndex] < totalCost) {
-                totalCost = grid[i][lastValidColumnIndex];
+            if (grid[i][lastValidColumnIndex] < mTotalCost) {
+                mTotalCost = grid[i][lastValidColumnIndex];
                 currentRowIndex = i;
             }
         }
@@ -80,25 +80,24 @@ public class Findpath {
     }
 
     public void generateShortestPath(int lastValidColumnIndex, int currentRowIndex) {
-
-        path.add(currentRowIndex + 1);
+        mPath.add(currentRowIndex + 1);
         while (lastValidColumnIndex > 0) {
-            ((LinkedList)path).addFirst(matrix.getMatrixTracker()[currentRowIndex][lastValidColumnIndex] + 1);
-            currentRowIndex = matrix.getMatrixTracker()[currentRowIndex][lastValidColumnIndex--];
+            ((LinkedList) mPath).addFirst(mMatrix.getMatrixTracker()[currentRowIndex][lastValidColumnIndex] + 1);
+            currentRowIndex = mMatrix.getMatrixTracker()[currentRowIndex][lastValidColumnIndex--];
         }
     }
 
-    public boolean isPathPossible () {
-        return isPathPossible;
+    public boolean isPathPossible() {
+        return mIsPathPossible;
     }
 
     public List<Integer> getPath() {
-        return path;
+        return mPath;
     }
 
     public int getTotalCost() {
-        if (totalCost < 0 )
+        if (mTotalCost < 0 )
             return 0;
-        return totalCost;
+        return mTotalCost;
     }
 }
