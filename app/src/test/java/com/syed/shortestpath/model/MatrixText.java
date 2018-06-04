@@ -10,7 +10,7 @@ import org.junit.Test;
 
 public class MatrixText {
 
-    int[][] grid= new int[][]{
+    int[][] grid = new int[][] {
             {3, 4, 1, 2, 8, 6},
             {6, 1, 8, 2, 7, 4},
             {5, 9, 3, 9, 9, 5},
@@ -48,5 +48,11 @@ public class MatrixText {
     @Test
     public void bestIndexToPick_TakingLeftValue() {
         Assert.assertEquals(matrix.bestIndexToPickFromColumn(2, 1), 2);
+    }
+
+    @Test
+    public void isValidMatrix() {
+        Matrix matrix = new Matrix(false);
+        Assert.assertEquals(matrix.isValidMatrix(), false);
     }
 }

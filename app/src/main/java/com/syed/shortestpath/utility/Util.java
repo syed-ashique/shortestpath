@@ -31,7 +31,7 @@ public class Util {
                 try {
                     integerRowsList.add(Integer.parseInt(value));
                 } catch (Exception e) {
-                    throw new RuntimeException("Invalid matrix");
+                    return new Matrix(false);
                 }
             }
             grid.add(integerRowsList);

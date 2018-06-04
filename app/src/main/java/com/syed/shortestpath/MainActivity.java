@@ -43,7 +43,14 @@ public class MainActivity extends AppCompatActivity {
     public void getResult() {
         resetView();
         try {
-            Matrix matrix = Util.parseInput(mEditTextInput.getText().toString());
+            String input = mEditTextInput.getText().toString();
+
+            Matrix matrix = Util.parseInput(input);
+            if (!matrix.isValidMatrix()) {
+                mTextViewError.setVisibility(View.VISIBLE);
+                mTextViewError.setText("Invalid matrix");
+                return;
+            }
             Findpath findpath = new Findpath(matrix);
             findpath.calculatePath();
 
