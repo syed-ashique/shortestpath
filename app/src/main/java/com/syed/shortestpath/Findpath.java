@@ -20,6 +20,21 @@ public class Findpath {
         path = new LinkedList<>();
     }
 
+    /**
+     *  1. pick the best index from previous column if it is not the first column
+     *  2. keep track where it came from in a different matrix
+     *  3. if one value in column is less than 50 still have a valid path
+     *  4. continue the above process till the last column
+     *
+     *  Total cost finding:
+     *      iterate through the last valid column to find the totalcost
+     *
+     *  Path finding:
+     *      1. find the lowest value from the last valid column.
+     *      2. check the value where it came from and add it to the queue.
+     *      3. do the process until it reaches to the first column     *
+     */
+
     public void calculatePath () {
         int[][] grid = matrix.getMatrix();
         int lastValidColumnIndex = -1;
@@ -50,6 +65,7 @@ public class Findpath {
         if (lastValidColumnIndex == -1)
             return;
 
+        //find total cost
         totalCost = Integer.MAX_VALUE;
         int currentRowIndex = 0;
         for (int i = 0; i < grid.length; i++) {
@@ -59,7 +75,7 @@ public class Findpath {
             }
         }
 
-
+        //find the path
         generateShortestPath(lastValidColumnIndex, currentRowIndex);
     }
 
