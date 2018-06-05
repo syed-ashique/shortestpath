@@ -10,7 +10,7 @@ import java.util.List;
 public class UtilTest {
 
     @Test
-    public void parseInput() {
+    public void parseInputTest() {
         String input = "51 51 51\n0 51 51\n51 51 51\n5 5 51";
         int[][] grid= new int[][]{
                 {51, 51, 51},
@@ -20,6 +20,24 @@ public class UtilTest {
         };
 
         Assert.assertEquals(Util.parseInput(input).getMatrix(),grid);
+    }
+
+    @Test
+    public void parseNullInputTest() {
+        String input = "";
+        Assert.assertNull(Util.parseInput(input).getMatrix());
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void parseInput_ThrowExceptionTest() {
+        String input = "51 51\n0 51 51\n51 51 51\n5 5 51";
+        Util.parseInput(input);
+    }
+
+    @Test
+    public void parseInput_ThrowExceptionInvalidTest() {
+        String input = "51 51 AA\n0 51 51\n51 51 51\n5 5 51";
+        Assert.assertEquals(Util.parseInput(input).isValidMatrix(),false);
     }
 
     @Test
