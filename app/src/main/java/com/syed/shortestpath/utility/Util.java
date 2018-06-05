@@ -14,6 +14,10 @@ public class Util {
 
     public static Matrix parseInput(String input) {
 
+        if (input.length() == 0) {
+            return null;
+        }
+
         List<String> rows = Arrays.asList(input.split("\n"));
         List<List<Integer>> grid = new ArrayList<>();
 
@@ -37,11 +41,7 @@ public class Util {
             grid.add(integerRowsList);
         }
 
-        if (grid.size() > 0) {
-            return new Matrix(convertListToArray(grid));
-        } else {
-            return null;
-        }
+        return new Matrix(convertListToArray(grid));
     }
 
     public static int[][] convertListToArray(List<List<Integer>> grid) {

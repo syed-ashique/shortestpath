@@ -25,7 +25,7 @@ public class UtilTest {
     @Test
     public void parseNullInputTest() {
         String input = "";
-        Assert.assertNull(Util.parseInput(input).getMatrix());
+        Assert.assertNull(Util.parseInput(input));
     }
 
     @Test(expected = RuntimeException.class)
