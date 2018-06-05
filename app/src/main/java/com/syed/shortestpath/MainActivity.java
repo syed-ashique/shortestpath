@@ -7,6 +7,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.syed.shortestpath.model.Matrix;
+import com.syed.shortestpath.model.Output;
 import com.syed.shortestpath.utility.Util;
 
 import java.util.List;
@@ -51,12 +52,13 @@ public class MainActivity extends AppCompatActivity {
                 mTextViewError.setText("Invalid matrix");
                 return;
             }
-            Findpath findpath = new Findpath(matrix);
-            findpath.calculatePath();
+            PathManager pathManager = new PathManager(matrix);
+            pathManager.calculatePath();
+            Output output = pathManager.getOutput();
 
-            mTextViewPathPossible.setText(findpath.isPathPossible() ? "Yes" : "No");
-            mTextViewTotalCost.setText(String.valueOf(findpath.getTotalCost()));
-            mTextViewPath.setText("["+pathValue(findpath.getPath())+"]");
+            mTextViewPathPossible.setText(output.isPathPossible() ? "Yes" : "No");
+            mTextViewTotalCost.setText(String.valueOf(output.getTotalCost()));
+            mTextViewPath.setText("["+pathValue(output.getPath())+"]");
         } catch (Exception ex) {
             mTextViewError.setVisibility(View.VISIBLE);
             mTextViewError.setText("Something Went Wrong");

@@ -8,6 +8,24 @@ public class Matrix {
     private int[][] mMatrix;
     private int[][] mMatrixTracker;
     private boolean mIsValidMatrix;
+    private int mLastValidColumnIndex;
+    private int mLastValidRowIndex;
+
+    public int getLastValidColumnIndex() {
+        return mLastValidColumnIndex;
+    }
+
+    public void setLastValidColumnIndex(int lastValidColumnIndex) {
+        this.mLastValidColumnIndex = lastValidColumnIndex;
+    }
+
+    public int getLastValidRowIndex() {
+        return mLastValidRowIndex;
+    }
+
+    public void setLastValidRowIndex(int lastValidRowIndex) {
+        this.mLastValidRowIndex = lastValidRowIndex;
+    }
 
     public Matrix(boolean isValidMatrix) {
         this.mIsValidMatrix = isValidMatrix;

@@ -3,6 +3,10 @@ package com.syed.shortestpath.utility;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class UtilTest {
 
     @Test
@@ -16,5 +20,19 @@ public class UtilTest {
         };
 
         Assert.assertEquals(Util.parseInput(input).getMatrix(),grid);
+    }
+
+    @Test
+    public void convertListToArrayTest() {
+        List<List<Integer>> listOfList = new ArrayList();
+        listOfList.add(Arrays.asList(3,4));
+        listOfList.add(Arrays.asList(1,2));
+
+        int [][] grid = new int[][] {
+                {3,4},
+                {1,2}
+        };
+
+        Assert.assertEquals(Util.convertListToArray(listOfList), grid);
     }
 }

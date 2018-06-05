@@ -37,18 +37,21 @@ public class Util {
             grid.add(integerRowsList);
         }
 
-        int[][] gridInt;
         if (grid.size() > 0) {
-            gridInt = new int[grid.size()][grid.get(0).size()];
-            for (int i=0; i<grid.size(); i++) {
-                for (int j = 0; j< grid.get(0).size(); j++) {
-                    gridInt[i][j] = grid.get(i).get(j);
-                }
-            }
-
-            return new Matrix(gridInt);
+            return new Matrix(convertListToArray(grid));
         } else {
             return null;
         }
+    }
+
+    public static int[][] convertListToArray(List<List<Integer>> grid) {
+        int[][] gridInt = new int[grid.size()][grid.get(0).size()];
+        for (int i=0; i<grid.size(); i++) {
+            for (int j = 0; j< grid.get(0).size(); j++) {
+                gridInt[i][j] = grid.get(i).get(j);
+            }
+        }
+
+        return gridInt;
     }
 }
