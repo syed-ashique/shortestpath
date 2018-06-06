@@ -35,6 +35,14 @@ public class UtilTest {
     }
 
     @Test
+    public void parseInput_invalidMatrix() {
+        String input = "5 4 H\n" +
+                       "8 M 7\n" +
+                       "5 7 5\n";
+        Assert.assertEquals(Util.parseInput(input).isValidMatrix(), false);
+    }
+
+    @Test
     public void parseInput_ThrowExceptionInvalidTest() {
         String input = "51 51 AA\n0 51 51\n51 51 51\n5 5 51";
         Assert.assertEquals(Util.parseInput(input).isValidMatrix(),false);
